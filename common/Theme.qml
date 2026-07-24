@@ -62,6 +62,13 @@ Singleton {
 
     readonly property color background: gray800
 
+    // cybrdots no1/no2 -- slightly lighter than no0/background, used
+    // for title-bar strips and card backgrounds throughout the rice
+    // (waybar's no1/no2, the panels' own win-title bars). Added for
+    // the desktop panels; the greeter itself only ever used no0.
+    readonly property color surface: "#05070D"    // cybrdots no1
+    readonly property color surfaceAlt: "#0A0E1A" // cybrdots no2
+
     readonly property color ctosGray: gray200
 
     readonly property color textPrimary: gray50
