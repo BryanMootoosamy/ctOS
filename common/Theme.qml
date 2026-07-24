@@ -39,7 +39,7 @@ Singleton {
 
     readonly property color gray50: "#ffffff"
     readonly property color gray100: "#CACACA"
-    readonly property color gray200: "#D9D9D9"          // unchanged — this drives borders/structural elements throughout the greeter
+    readonly property color gray200: "#898D99"          // was #D9D9D9 — now cybrdots wh0 (this drives borders/structural elements throughout the greeter, and the same divider role in cyberdesk-2077/panels)
     readonly property color gray300: "#c3c3c3"          // unchanged
     readonly property color gray500: "#7a7a7a"
     readonly property color gray800: "#030408"          // was #0E0E0E — now cybrdots no0

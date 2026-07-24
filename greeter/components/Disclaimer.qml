@@ -16,9 +16,9 @@ RowLayout {
         Layout.preferredHeight: 32
     }
 
-    property string lineOneText: "Property of Blume Corp. All usage is"
+    property string lineOneText: "Unauthorized access violates NC Municipal Code."
     property int lineOneCharsShown: lineOneText.length
-    property string lineTwoText: "subject to Sentinel Active Monitoring."
+    property string lineTwoText: "All traffic logged by NetWatch Compliance Div."
     property int lineTwoCharsShown: lineTwoText.length
 
     ColumnLayout {

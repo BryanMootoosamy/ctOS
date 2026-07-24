@@ -280,7 +280,7 @@ ColumnLayout {
                     family: Settings.fontFamily
                 }
 
-                text: "blume-krn-1.0.8 <> ctOS-1.0.0-a"
+                text: "icebreaker-krn-2.1.7 <> ctOS-1.0.0-a"
             }
         }
     }

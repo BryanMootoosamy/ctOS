@@ -162,8 +162,12 @@ Singleton {
         onTriggered: terminalManager.processQueue()
     }
 
-    readonly property string _blumePrefix: "[BLUME_IDP]"
-    readonly property string _sentinelPrefix: "[SENTINEL]"
+    // Cyberpunk 2077-style netrunning terminal flavor -- NetWatch is the
+    // in-universe body that monitors/polices netspace activity (the exact
+    // role "Blume" played here), ICE (Intrusion Countermeasures Electronics)
+    // is what flags/blocks a failed intrusion.
+    readonly property string _netwatchPrefix: "[NETWATCH]"
+    readonly property string _icePrefix: "[ICE]"
 
     Component.onCompleted: {
         const protocol = Settings.isTest ? "CTOS_TEST" : Settings.isGreetd || Settings.isKiosk ? "CTOS_GREETD" : Settings.isLockd ? "CTOS_LOCKD" : "CTOS_DEFAULT";
@@ -182,10 +186,10 @@ Singleton {
                 pauseWithMarker: "UI_INIT"
             },
             {
-                message: `◈ ${terminalManager._blumePrefix} using Protocol::${protocol}`
+                message: `◈ ${terminalManager._netwatchPrefix} using Protocol::${protocol}`
             },
             {
-                message: `${terminalManager._blumePrefix} Authentication Session opened.`
+                message: `${terminalManager._netwatchPrefix} Authentication Session opened.`
             }
         ]);
     }
@@ -201,17 +205,17 @@ Singleton {
             case AuthManager.State.Success:
                 terminalManager.displayMessages([
                     {
-                        message: `${terminalManager._blumePrefix} IDENTITY_VERIFIED // SID:${Faker.randomHexString(24)}`
+                        message: `${terminalManager._netwatchPrefix} IDENTITY_VERIFIED // SID:${Faker.randomHexString(24)}`
                     },
                     {
-                        message: `${terminalManager._blumePrefix} Authentication session closed.`
+                        message: `${terminalManager._netwatchPrefix} Authentication session closed.`
                     }
                 ]);
                 break;
             case AuthManager.State.Failed:
                 terminalManager.displayMessages([
                     {
-                        message: `${terminalManager._sentinelPrefix} Authentication Failed (TraceId: ${Faker.randomHexString(16)})`,
+                        message: `${terminalManager._icePrefix} Authentication Failed (TraceId: ${Faker.randomHexString(16)})`,
                         virtualCommand: "login"
                     },
                 ], {
