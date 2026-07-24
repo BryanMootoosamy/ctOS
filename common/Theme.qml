@@ -39,7 +39,11 @@ Singleton {
 
     readonly property color gray50: "#ffffff"
     readonly property color gray100: "#CACACA"
-    readonly property color gray200: "#898D99"          // was #D9D9D9 — now cybrdots wh0 (this drives borders/structural elements throughout the greeter, and the same divider role in cyberdesk-2077/panels)
+    // First patch pass used wh0 (#898D99) here -- still just a different
+    // shade of gray, missing the point: cybrdots' actual dominant
+    // structural accent across the rest of the rice (panel borders,
+    // headers) is RED, not any neutral gray/white tone. Fixed to re0.
+    readonly property color gray200: "#F24848"          // was #D9D9D9 (Watch Dogs), then #898D99 (still gray) — now cybrdots re0, matching the panels' own dominant-red borders/headers
     readonly property color gray300: "#c3c3c3"          // unchanged
     readonly property color gray500: "#7a7a7a"
     readonly property color gray800: "#030408"          // was #0E0E0E — now cybrdots no0
@@ -61,6 +65,12 @@ Singleton {
     // SECTION Theme
 
     readonly property color background: gray800
+    // Referenced by greeter/components/Session.qml (the username strip
+    // background) but was never actually defined anywhere in this file --
+    // rendered as a flat gray fallback box. Reuses surfaceAlt (cybrdots
+    // no2), the same "brighter than base background" tone already used
+    // for card/strip backgrounds elsewhere.
+    readonly property color backgroundBright: surfaceAlt
 
     // cybrdots no1/no2 -- slightly lighter than no0/background, used
     // for title-bar strips and card backgrounds throughout the rice
