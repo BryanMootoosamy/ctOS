@@ -261,13 +261,13 @@ ColumnLayout {
             }
 
             border {
-                color: Qt.darker(Theme.textPrimary, 1.6)
+                color: Qt.darker(Theme.ctosGray, 1.6)
                 width: 1
             }
 
             Text {
                 id: version
-                color: Qt.darker(Theme.textPrimary, 1.2)
+                color: Qt.darker(Theme.ctosGray, 1.2)
 
                 anchors {
                     verticalCenter: parent.verticalCenter
