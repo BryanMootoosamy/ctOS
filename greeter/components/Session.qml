@@ -55,10 +55,9 @@ RowLayout {
                             Layout.fillWidth: true
                         }
 
-                        Image {
+                        FlatlineMarker {
                             Layout.preferredWidth: 15 * Units.vh
                             Layout.preferredHeight: width
-                            source: "../resources/tesseract.svg"
                         }
                     }
                 }

@@ -20,9 +20,8 @@ Row {
         }
         width: 35 * Units.vh
 
-        Image {
+        FlatlineMarker {
             id: tesseract
-            source: "../resources/tesseract.svg"
             Layout.preferredHeight: deviceText.width + 2
             Layout.preferredWidth: deviceText.width + 2
 

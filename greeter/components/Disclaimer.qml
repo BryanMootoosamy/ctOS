@@ -8,9 +8,8 @@ RowLayout {
     id: disclaimer
     spacing: 8
 
-    Image {
+    FlatlineMarker {
         id: icon
-        source: "../resources/tesseract.svg"
         Layout.alignment: Qt.AlignTop
         Layout.preferredWidth: 32
         Layout.preferredHeight: 32
