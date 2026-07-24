@@ -61,7 +61,7 @@ Item {
 
     Text {
         id: ct
-        text: "CT"
+        text: "NC"
 
         width: os.width / 2
 

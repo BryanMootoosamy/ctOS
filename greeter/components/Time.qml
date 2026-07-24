@@ -31,10 +31,9 @@ Item {
             finalHorizontalOffset: 20
             finalVerticalOffset: 20
 
-            Image {
+            FlatlineMarker {
                 id: logo
                 anchors.fill: parent
-                source: "../resources/os-icon.svg"
             }
         }
 

@@ -18,11 +18,24 @@ RowLayout {
                 height: 56 * Units.vh
                 width: height
 
-                Image {
+                // Simple reticle mark, replacing the old Blume Corp hex
+                // logo -- dark-on-red like the barcode strip below it.
+                Item {
                     anchors.fill: parent
-                    anchors.margins: 2 * Units.vh
-                    fillMode: Image.PreserveAspectFit
-                    source: "../resources/blume-logo.svg"
+                    anchors.margins: 6 * Units.vh
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "transparent"
+                        border.color: Theme.background
+                        border.width: 3
+                    }
+                    Rectangle {
+                        anchors.centerIn: parent
+                        width: parent.width * 0.22
+                        height: width
+                        color: Theme.background
+                    }
                 }
             }
 
