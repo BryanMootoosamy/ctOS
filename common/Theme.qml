@@ -44,9 +44,19 @@ Singleton {
     readonly property color gray500: "#7a7a7a"
     readonly property color gray800: "#030408"          // was #0E0E0E — now cybrdots no0
 
-    readonly property color accentGreen: "#1bfd9c"      // unchanged, kept for anything still referencing it
+    // Second patch pass (cyberdesk-2077 panels/): accentGreen was still
+    // the original Watch Dogs green (#1bfd9c), unused anywhere in ctOS
+    // (confirmed: grep turns up nothing outside this file) but a real
+    // divergence from cybrdots per vars.conf being the source of truth.
+    // Fixed to the real gr0. Added accentOrange/accentYellow, both
+    // needed for the desktop panels' fuller "ok/warn/critical" states
+    // (the greeter itself only ever needed cyan/red -- see success/
+    // error below, untouched).
+    readonly property color accentGreen: "#30F291"      // cybrdots gr0 (was Watch Dogs' #1bfd9c, unused, now correct)
     readonly property color accentCyan: "#29BECC"       // cybrdots cy0 — password-correct feedback
     readonly property color accentRed: "#F24848"        // was #fc3e38 — now cybrdots re0, password-error feedback
+    readonly property color accentOrange: "#F26118"     // cybrdots or0
+    readonly property color accentYellow: "#F2D230"     // cybrdots ye0
 
     // SECTION Theme
 
@@ -65,6 +75,14 @@ Singleton {
 
     readonly property color success: accentCyan         // <- password field turns cyan on correct entry
     readonly property color error: accentRed             // <- password field turns cybrdots red on wrong entry
+
+    // Desktop panels' state semantic (separate from the greeter's own
+    // success/error above, which must stay cyan/red -- PasswordField
+    // reads them directly). Matches cybrdots' own usage elsewhere in
+    // the rice: green = ok/good, orange = warning, red = critical.
+    readonly property color ok: accentGreen
+    readonly property color warn: accentOrange
+    readonly property color critical: accentRed
 
     // SECTION Fonts
     property string fontFamily: "JetBrainsMono Nerd Font"
