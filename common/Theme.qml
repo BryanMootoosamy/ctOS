@@ -61,6 +61,7 @@ Singleton {
     readonly property color accentRed: "#F24848"        // was #fc3e38 — now cybrdots re0, password-error feedback
     readonly property color accentOrange: "#F26118"     // cybrdots or0
     readonly property color accentYellow: "#F2D230"     // cybrdots ye0
+    readonly property color accentBlue: "#3061F2"       // cybrdots bl0 -- panels/MainPanel.qml's fan icons
 
     // SECTION Theme
 
