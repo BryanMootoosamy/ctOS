@@ -45,7 +45,7 @@ Item {
             Text {
                 id: time
 
-                color: Theme.textPrimaryDimmer
+                color: Theme.critical
 
                 text: Qt.formatDateTime(clock.date, "hh:mm")
 
@@ -67,7 +67,7 @@ Item {
                 height: regionLabel.height + 6
 
                 border {
-                    color: "#414141"
+                    color: Theme.critical
                     width: 1
                 }
 
@@ -87,7 +87,7 @@ Item {
                         leftMargin: 8
                     }
 
-                    color: "#B1B1B1"
+                    color: Theme.textPrimaryDim
                     // text: "AU-SOUTH-EAST-2"
                     text: Qt.formatDateTime(clock.date, "dddd dd MMMM")
                     font {

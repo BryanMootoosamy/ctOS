@@ -103,7 +103,7 @@ ColumnLayout {
                     Text {
                         id: entry
 
-                        color: Theme.textPrimaryDimmer
+                        color: Theme.ctosGray
                         font: terminal.font
 
                         lineHeight: terminal.lineHeight
@@ -156,7 +156,7 @@ ColumnLayout {
                         property string command: inputDelegate.syntheticCommand
 
                         text: "» " + command.substr(0, charIndex)
-                        color: Theme.textPrimaryDim
+                        color: Theme.ctosGray
                         font: terminal.font
                         height: parent.height
 
@@ -180,7 +180,7 @@ ColumnLayout {
                         height: parent.height
                         width: parent.width - terminalPrompt.width
 
-                        color: Theme.textPrimaryDim
+                        color: Theme.ctosGray
                         font: terminal.font
 
                         enabled: !inputDelegate.syntheticCommand

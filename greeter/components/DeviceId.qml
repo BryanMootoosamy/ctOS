@@ -56,7 +56,7 @@ Row {
 
             Layout.fillWidth: true
 
-            color: Theme.textPrimaryDim
+            color: Theme.ctosGray
         }
     }
 
