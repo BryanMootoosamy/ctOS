@@ -27,7 +27,7 @@ Item {
             baselineOffset: -3
         }
 
-        color: Theme.textPrimary
+        color: Theme.critical
 
         font {
             family: Settings.fontFamily
@@ -57,6 +57,24 @@ Item {
                 origin.y: progress.height / 2
             }
         ]
+
+        // Chunky segmented look (CP2077 HUD loading bars are thick and
+        // divided into blocks, not a thin smooth sweep) -- thin dark
+        // ticks over the red fill, spaced evenly across the bar.
+        Row {
+            anchors.fill: parent
+            spacing: parent.width / 28
+
+            Repeater {
+                model: 26
+                Rectangle {
+                    width: 2
+                    height: parent.height
+                    color: Theme.background
+                    opacity: 0.6
+                }
+            }
+        }
     }
 
     Text {
@@ -231,7 +249,7 @@ Item {
             NumberAnimation {
                 target: progressY
                 property: "yScale"
-                to: 0.075
+                to: 0.18 // was 0.075 -- too thin, read as a hairline not a CP2077-style HUD bar
                 duration: 250
                 easing.type: Easing.OutCirc
             }
