@@ -170,7 +170,7 @@ Singleton {
     readonly property string _icePrefix: "[ICE]"
 
     Component.onCompleted: {
-        const protocol = Settings.isTest ? "CTOS_TEST" : Settings.isGreetd || Settings.isKiosk ? "CTOS_GREETD" : Settings.isLockd ? "CTOS_LOCKD" : "CTOS_DEFAULT";
+        const protocol = Settings.isTest ? "NC_TEST" : Settings.isGreetd || Settings.isKiosk ? "NC_GREETD" : Settings.isLockd ? "NC_LOCKD" : "NC_DEFAULT";
         displayMessages([
             {
                 message: "REGION_LINK_ESTABLISHED : AU-SOUTH-EAST-2"
