@@ -97,6 +97,24 @@ ColumnLayout {
 
                 xScale: passwordField.progressPercentage / 100
             }
+
+            // Chunky segmented look (CP2077 HUD loading bars, not a thin
+            // smooth sweep) -- same treatment as the greeter's other
+            // progress indicators.
+            Row {
+                anchors.fill: parent
+                spacing: parent.width / 40
+
+                Repeater {
+                    model: 36
+                    Rectangle {
+                        width: 2
+                        height: parent.height
+                        color: Theme.background
+                        opacity: 0.6
+                    }
+                }
+            }
         }
 
         Text {
@@ -238,7 +256,7 @@ ColumnLayout {
             NumberAnimation {
                 target: passwordField
                 property: "Layout.preferredHeight"
-                to: 4 * Units.vh
+                to: 10 * Units.vh // was 4 -- too thin for the CP2077 HUD look
                 duration: 300
                 easing.type: Easing.OutCubic
             }
