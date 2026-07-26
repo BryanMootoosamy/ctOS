@@ -94,7 +94,11 @@ ColumnLayout {
         Rectangle {
             id: progress
 
+            // Small inset so the fill doesn't sit flush against
+            // passwordFieldBg's 2px border -- was edge-to-edge, no
+            // breathing room between the outline and the interior.
             anchors.fill: parent
+            anchors.margins: 4
             color: Theme.ctosGray
 
             transform: Scale {
@@ -132,7 +136,7 @@ ColumnLayout {
                 topMargin: 5 * Units.vh
                 right: parent.right
             }
-            color: Theme.textPrimaryDim
+            color: Theme.critical
             font {
                 pixelSize: 14
                 family: Settings.fontFamily
@@ -151,7 +155,7 @@ ColumnLayout {
                 topMargin: 5 * Units.vh
                 left: parent.left
             }
-            color: Theme.textPrimaryDimmer
+            color: Theme.critical
             font {
                 pixelSize: 14
                 family: Settings.fontFamily
@@ -254,7 +258,7 @@ ColumnLayout {
             ColorAnimation {
                 target: passwordFieldBg
                 property: "border.color"
-                to: Theme.secondary
+                to: Theme.critical
                 duration: 200
             }
 
