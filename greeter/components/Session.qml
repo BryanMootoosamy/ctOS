@@ -101,9 +101,25 @@ RowLayout {
         width: height
 
         Image {
-            // TODO add proper profile picture
-            source: "../resources/user.svg"
+            id: avatar
+
+            // Real profile picture support: the standard `~/.face` convention
+            // used by LightDM/GDM/SDDM (a plain image file, no extension) --
+            // there was previously no way to set this at all, just a
+            // hardcoded placeholder. Falls back to that same placeholder if
+            // `.face` doesn't exist or fails to load, never left blank.
+            source: SessionManager.activeUser
+                ? "file://" + SessionManager.activeUser.homeDir + "/.face"
+                : "../resources/user.svg"
             anchors.fill: parent
+            fillMode: Image.PreserveAspectCrop
+            asynchronous: true
+
+            onStatusChanged: {
+                if (status === Image.Error) {
+                    source = "../resources/user.svg";
+                }
+            }
         }
     }
 
