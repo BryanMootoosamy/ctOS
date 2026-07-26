@@ -54,9 +54,9 @@ ColumnLayout {
         Layout.preferredHeight: 40 * Units.vh
         Layout.alignment: Qt.AlignCenter
         // Also drives the cursorDelegate color in PasswordField.qml (cursor:
-        // color: passwordField.color). Success/error were pinned to the
-        // greeter's original cyan/red here -- per explicit request, typing
-        // is now cybrdots blue and a valid password is cybrdots green
+        // color: passwordField.color). Per explicit request: typing stays
+        // cybrdots cyan (what was already there -- "bleuté" meant cyan,
+        // not accentBlue), a valid password now goes cybrdots green
         // instead of cyan.
         color: {
             switch (AuthManager.state) {
@@ -68,7 +68,7 @@ ColumnLayout {
             case AuthManager.State.Failed:
                 return Theme.error;
             default:
-                return Theme.accentBlue;
+                return Theme.accentCyan;
             }
         }
         enabled: AuthManager.state === AuthManager.State.Ready
