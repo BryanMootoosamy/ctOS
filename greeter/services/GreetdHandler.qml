@@ -1,6 +1,7 @@
 pragma Singleton
 
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Greetd
 import QtQuick
 
@@ -85,17 +86,72 @@ Singleton {
         }
     }
 
+    // Runs the exit command (e.g. "uwsm stop") and only calls
+    // Greetd.launch() once it has actually finished, instead of firing
+    // Greetd.launch() and Quickshell.execDetached(exitCommand) almost
+    // simultaneously (the previous behaviour) -- that raced the greeter's
+    // own compositor teardown against the new session's startup and
+    // intermittently lost: confirmed via journalctl showing
+    // "uwsm: A compositor or graphical-session* target is already
+    // active!" right before the login bounced back to the greeter,
+    // meaning the new `uwsm start` saw the outgoing greeter's systemd
+    // session target still marked active.
+    //
+    // `doLaunch()` is guarded by `launchedThisSession` so it only ever
+    // actually calls Greetd.launch() once, no matter which of the two
+    // paths below triggers it first:
+    //   - exitProcess.onExited (the normal, fast path)
+    //   - launchSafetyTimer (a fallback in case the exit command hangs
+    //     or never fires onExited for any reason -- without this, a
+    //     stuck exit command would leave the login silently frozen
+    //     forever instead of just landing back on the old racy-but-
+    //     working behaviour)
+    property var pendingLaunchCommand: []
+    property bool launchedThisSession: false
+
+    function doLaunch() {
+        if (handler.launchedThisSession) {
+            return;
+        }
+        handler.launchedThisSession = true;
+        launchSafetyTimer.stop();
+        Greetd.launch(handler.pendingLaunchCommand);
+    }
+
+    Process {
+        id: exitProcess
+        onExited: exitCode => {
+            logger.info(`Greeter exit command finished (code ${exitCode}).`);
+            handler.doLaunch();
+        }
+    }
+
+    Timer {
+        id: launchSafetyTimer
+        interval: 4000
+        repeat: false
+        onTriggered: {
+            logger.debug("Exit command didn't finish in time, launching anyway.");
+            handler.doLaunch();
+        }
+    }
+
     function finish() {
         const launchCommand = SessionManager.getLaunchCommand();
         const exitCommand = SessionManager.getExitCommand();
 
-        logger.info(`Launching: ${launchCommand.join(" ")}`);
         logger.info(`Exiting Greeter: ${exitCommand.join(" ") || "<none>"}`);
+        logger.info(`Launching: ${launchCommand.join(" ")}`);
 
-        Greetd.launch(launchCommand);
+        handler.pendingLaunchCommand = launchCommand;
+        handler.launchedThisSession = false;
 
         if (exitCommand.length) {
-            Quickshell.execDetached(exitCommand);
+            exitProcess.command = exitCommand;
+            exitProcess.running = true;
+            launchSafetyTimer.start();
+        } else {
+            handler.doLaunch();
         }
     }
 }

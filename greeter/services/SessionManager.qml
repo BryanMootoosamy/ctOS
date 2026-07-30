@@ -131,6 +131,18 @@ Singleton {
     }
 
     function getLaunchCommand() {
+        // Mirrors getExitCommand()'s override check above. Needed once the
+        // greeter itself stops running under uwsm (2026-07-30, see
+        // greeter.hyprland.lua/greetd config.toml) -- without an explicit
+        // override, the _uwsmManaged matching below picks the desktop
+        // entry whose uwsm-managed-ness matches the GREETER's own
+        // _isUsingUwsm, which would then wrongly select the non-uwsm
+        // hyprland.desktop entry (Exec=/usr/bin/start-hyprland) for the
+        // REAL session too, silently dropping uwsm's systemd session
+        // integration (XDG autostart, portals) from the real desktop.
+        if (Settings.launchCommand && Settings.launchCommand.length) {
+            return Settings.launchCommand;
+        }
         if (!activeDesktop || !activeDesktop.exec) {
             return [];
         }
